@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Functions</title>
+    <script>
+        function StringFunctions() {
+            let str = document.getElementById("inputString").value;
+
+            let result = `String Length: ${str.length}<br>
+                          Character at position 2: ${str.charAt(2)}<br>
+                          Slice (1, 4): ${str.slice(1, 4)}<br>
+                          Substring (1, 4): ${str.substring(1, 4)}<br>
+                          Substr (1, 4): ${str.substr(1, 4)}<br>
+                          To Upper Case: ${str.toUpperCase()}<br>
+                          To Lower Case: ${str.toLowerCase()}<br>
+                          Concat with 'World': ${str.concat(' World')}<br>
+                          Trimmed: ${str.trim()}<br>
+                          Trimmed Start: '${str.trimStart()}'<br>
+                          Trimmed End: '${str.trimEnd()}'<br>
+                          Repeat 3 times: ${str.repeat(3)}<br>
+                          Replace 'a' with 'o': ${str.replace('a', 'o')}<br>
+                          Replace all 'a' with 'o': ${str.replaceAll('a', 'o')}<br>
+                          Split by space: ${str.split(' ').join(', ')}<br>
+                `;
+
+
+            document.getElementById("output").innerHTML = result;
+        }
+    </script>
+</head>
+<body>
+    <h2>String Functions</h2>
+    Enter a String: <input type="text" id="inputString" onfocus="this.value=''" />
+    <br><br>
+    <button onclick="StringFunctions()">Run String Functions</button>
+    <div id="output"><br></div>
+</body>  
+</html>

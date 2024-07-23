@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Site</title>
+    <script>
+        function fact(){
+            let a = parseInt(document.getElementById("num1").value);
+            let i;
+            let result = 1;
+            for(i=1;i<=a;i++)
+            {
+                result = result*i;
+            }
+            document.getElementById("output").innerHTML = result;
+        }
+    </script>
+</head>
+<body>
+    Enter a Number <input type="text" id="num1" />
+    <br><br>
+    <button onclick="fact()">Factorial</button>
+    <br><br>
+    <div>
+        <label>Result: <span id="output"></span></label>
+    </div>
+</body>
+</html>
