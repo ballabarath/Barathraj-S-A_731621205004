@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow</title>
+</head>
+<body> 
+    <script>
+        const sum = () => 10+20;
+        document.write("<br>Addition : "+ sum());
+
+        const sub = (x, y) => x - y;
+        document.write("<br>Subtraction : "+ sub(50, 10));
+
+        const mul = (x, y, z) =>{ return  (x * y)};
+        document.write("<br>Multiplication : "+ mul(50, 10, 5));
+
+        const big = (a, b) =>{ 
+            if(a>b)
+                return a;
+            else    
+                return b;
+        }
+        document.write("<br>Biggest Number : "+ big(50, 100));
+        const fact = (a) =>{ 
+            let i;
+            let result = 1;
+            for(i=1;i<=a;i++)
+            {
+                result = result*i;
+            }
+            return result;
+        }
+        document.write("<br>Factorial of the 5 is : "+ fact(5));
+
+    </script>
+</body>
+</html>
