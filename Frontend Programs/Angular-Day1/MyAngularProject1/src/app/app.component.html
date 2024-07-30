@@ -1,4 +1,4 @@
-
+<!-- 
 
 <b>
   <h1>Interpolation</h1>
@@ -25,4 +25,39 @@
   <button (click)="changeImage()">Change Image</button>
   <br>
   
-</b>
+  <h1>Two Way Binding</h1>
+  <br>
+  Enter Your First Name <input type="text" [(ngModel)]="fname"/>
+  <br>
+  
+<b>Your Name is : {{fname}}</b>
+</b> -->
+
+
+
+
+
+
+<h1 [ngClass]="myClass">Structural and Attribute Directives</h1>
+<br>
+<button (click)="changeFlag()">Show or Hide Div</button>
+
+
+
+<div *ngIf="flag" [ngStyle]="mystyle"><br>
+    <br><h4>Team 7</h4>
+    <ul>
+      <li *ngFor = "let veh of vehicles" (click)="selectedITem(veh)">{{veh}}</li>
+    </ul><br>
+    <b>You are selected the member: {{selectedvehicles}}</b>
+    <br><br>
+    <div [ngSwitch]="selectedvehicles">
+      <font color="Red" *ngSwitchCase="'Naruto'">Team Leader</font>
+      <font color="green" *ngSwitchCase="'Sasuke'">Team Member</font>
+      <font color="green" *ngSwitchCase="'Sakura'">Team Member</font>
+      <font color="violet" *ngSwitchDefault>Invalid</font>
+    </div>
+    <br>
+    <button (click)="changestyle()">Change Style</button>
+</div>
+<br>
