@@ -1,1 +1,11 @@
-<p>right works!</p>
+<div class="card mt-3" id="content3">
+    <div class="card-header">
+      Total Water Bill List
+    </div>
+    <ul class="list-group list-group-flush">
+      <label>&nbsp;&nbsp;&nbsp;Id &nbsp;-&nbsp;&nbsp;Name - Bill</label><br>
+      <li class="list-group-item" *ngFor="let emp of employees; trackBy: trackById">
+        {{ emp.id }} - {{ emp.name }} - {{ emp.salary }}
+      </li>      
+    </ul>
+  </div>

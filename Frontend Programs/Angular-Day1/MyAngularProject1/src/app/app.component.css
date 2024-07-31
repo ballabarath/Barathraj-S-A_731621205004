@@ -4,3 +4,11 @@
 .MyClass2{
     color:red;
 }
+
+th{
+    background-color: gray;
+}
+a{
+    color: aliceblue;
+    text-decoration: none;
+}

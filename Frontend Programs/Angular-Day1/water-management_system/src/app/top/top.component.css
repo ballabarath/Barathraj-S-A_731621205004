@@ -1,0 +1,22 @@
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+  }
+#head{
+    height: 50px;
+    justify-content: center;
+    font-size: 25px;
+    color: green;
+    border:yellow;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(246, 165, 4, 0.1);
+    font-weight: bold;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

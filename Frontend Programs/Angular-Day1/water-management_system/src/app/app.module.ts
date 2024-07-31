@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CenterComponent } from './center/center.component';
-import { TopComponent } from './top/top.component';
 import { RightComponent } from './right/right.component';
-import { FormsModule } from '@angular/forms';
+import { EmployeeService } from './employee.service';
+import { TopComponent } from './top/top.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CenterComponent,
-    TopComponent,
-    RightComponent
+    RightComponent,
+    TopComponent
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [EmployeeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
