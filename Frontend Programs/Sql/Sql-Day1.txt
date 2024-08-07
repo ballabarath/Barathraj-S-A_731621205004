@@ -1,0 +1,179 @@
+create table tbl_employee ( empid number(5), empname varchar2(20), empsalary number(5))
+Table created.
+
+desc tbl_employee 
+TABLE TBL_EMPLOYEE
+Column	Null?	Type
+EMPID	 - 	NUMBER(5,0)
+EMPNAME	 - 	VARCHAR2(20)
+EMPSALARY	 - 	NUMBER(5,0)
+
+3 rows selected.
+
+desc tbl_employee
+TABLE TBL_EMPLOYEE
+Column	Null?	Type
+EMPID	 - 	NUMBER(5,0)
+EMPNAME	 - 	VARCHAR2(20)
+EMPSALARY	 - 	NUMBER(5,0)
+
+3 rows selected.
+
+insert into tbl_employee values(101, 'Kavin', 45000)
+1 row(s) inserted.
+
+select * from tbl_employee
+EMPID	EMPNAME	EMPSALARY
+101	Kavin	45000
+
+insert into tbl_employee values(102, 'Vijay', 55000)
+1 row(s) inserted.
+insert into tbl_employee values(103, 'Yuva', 50000)
+1 row(s) inserted.
+insert into tbl_employee values(104, 'Yogi', 30000)
+1 row(s) inserted.
+
+select * from tbl_employee 
+EMPID	EMPNAME	EMPSALARY
+102	Vijay	55000
+103	Yogi	30000
+101	Kavin	45000
+103	Yuva	50000
+
+4 rows selected.
+
+select * from tbl_employee 
+EMPID	EMPNAME	EMPSALARY
+102	Vijay	55000
+103	Yogi	30000
+101	Kavin	45000
+103	Yuva	50000
+
+4 rows selected.
+
+insert into tbl_employee values(104, 'Yogi', 30000)
+1 row(s) inserted.
+
+select * from tbl_employee 
+EMPID	EMPNAME	EMPSALARY
+104	Yogi	30000
+102	Vijay	55000
+103	Yogi	30000
+101	Kavin	45000
+103	Yuva	50000
+
+5 rows selected.
+
+select distinct empid from tbl_employee 
+EMPID
+104
+103
+101
+102
+
+4 rows selected.
+
+select distinct * from tbl_employee 
+EMPID	EMPNAME	EMPSALARY
+101	Kavin	45000
+103	Yuva	50000
+104	Yogi	30000
+103	Yogi	30000
+102	Vijay	55000
+
+5 rows selected.
+
+select distinct empid from tbl_employee 
+EMPID
+104
+103
+101
+102
+
+4 rows selected.
+
+select distinct * from tbl_employee
+EMPID	EMPNAME	EMPSALARY
+101	Kavin	45000
+103	Yuva	50000
+104	Yogi	30000
+103	Yogi	30000
+102	Vijay	55000
+
+5 rows selected.
+
+select * from tbl_employee where empid=103
+EMPID	EMPNAME	EMPSALARY
+103	Yogi	30000
+103	Yuva	50000
+
+2 rows selected.
+
+
+select * from tbl_employee where empid=103
+EMPID	EMPNAME	EMPSALARY
+103	Yogi	30000
+103	Yuva	50000
+
+2 rows selected.
+
+select * from tbl_employee where empid != 103
+EMPID	EMPNAME	EMPSALARY
+104	Yogi	30000
+102	Vijay	55000
+101	Kavin	45000
+
+3 rows selected.
+
+select * from tbl_employee where empid <> 103
+EMPID	EMPNAME	EMPSALARY
+104	Yogi	30000
+102	Vijay	55000
+101	Kavin	45000
+
+3 rows selected.
+
+select * from tbl_employee where empsalary >= 25000
+EMPID	EMPNAME	EMPSALARY
+104	Yogi	30000
+102	Vijay	55000
+103	Yogi	30000
+101	Kavin	45000
+103	Yuva	50000
+
+5 rows selected.
+
+select * from tbl_employee where empsalary >= 45000
+EMPID	EMPNAME	EMPSALARY
+102	Vijay	55000
+101	Kavin	45000
+103	Yuva	50000
+
+3 rows selected.
+
+update tbl_employee set empsalary = 50000 where empid = 102
+1 row(s) updated.
+
+select * from tbl_employee
+EMPID	EMPNAME	EMPSALARY
+104	Yogi	30000
+102	Vijay	50000
+103	Yogi	30000
+101	Kavin	45000
+103	Yuva	50000
+
+5 rows selected.
+
+delete from tbl_employee where empsalary = 30000
+2 row(s) deleted.
+
+select * from tbl_employee 
+EMPID	EMPNAME	EMPSALARY
+102	Vijay	50000
+101	Kavin	45000
+103	Yuva	50000
+
+3 rows selected.
+
+commit
+Statement processed.

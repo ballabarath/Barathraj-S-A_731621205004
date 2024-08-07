@@ -1,0 +1,392 @@
+SQL> create table tbl_employee(Emp_Id number(5), Emp_Name varchar2(20), Emp_Salary number(6));
+
+Table created.
+
+SQL> insert into tbl_employee values(101,'Kavin',50000);
+
+1 row created.
+
+SQL> insert into tbl_employee values(102,'Bharath',40000);
+
+1 row created.
+
+SQL> insert into tbl_employee values(103,'Vijay',30000);
+
+1 row created.
+
+SQL> insert into tbl_employee values(104,'Barath',50000);
+
+1 row created.
+
+SQL> insert into tbl_employee values(105,'Yogi',20000);
+
+1 row created.
+
+SQL> select * from tbl_employee;
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       101 Kavin                     50000
+       102 Bharath                   40000
+       103 Vijay                     30000
+       104 Barath                    50000
+       105 Yogi                      20000
+
+SQL> select * from tbl_employee where Emp_id in(101,102,103,109);
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       101 Kavin                     50000
+       102 Bharath                   40000
+       103 Vijay                     30000
+
+SQL> select * from tbl_employee where Emp_id (101,102,103,109);
+select * from tbl_employee where Emp_id (101,102,103,109)
+                                                        *
+ERROR at line 1:
+ORA-00920: invalid relational operator                                                                                                                                                                                              SQL> select * from tbl_employee where Emp_id not in(101,102,103,109);                                                                                       EMP_ID EMP_NAME             EMP_SALARY                                  ---------- -------------------- ----------                                         104 Barath                    50000                                         105 Yogi                      20000                                                                                                              SQL> select * from tbl_employee where Emp_salary between 30000 and 50000;                                                                                   EMP_ID EMP_NAME             EMP_SALARY                                  ---------- -------------------- ----------                                         101 Kavin                     50000                                         102 Bharath                   40000
+       103 Vijay                     30000
+       104 Barath                    50000
+
+SQL> select * from tbl_employee where Emp_salary not between 30000 and 50000
+;
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       105 Yogi                      20000
+
+SQL> select * from tbl_employee where Emp_salary not between 50000 and 30000
+;
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       101 Kavin                     50000
+       102 Bharath                   40000
+       103 Vijay                     30000
+       104 Barath                    50000
+       105 Yogi                      20000
+
+SQL> select * from tbl_employee where Emp_salary not between 3000 and 5000;
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       101 Kavin                     50000
+       102 Bharath                   40000
+       103 Vijay                     30000
+       104 Barath                    50000
+       105 Yogi                      20000
+
+SQL> select * from tbl_employee where emp_id in(101,102,103) and emp_salary
+> 50000;
+
+no rows selected
+
+SQL> select * from tbl_employee where emp_id in(101,102,103) and emp_salary > 20000;
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       101 Kavin                     50000
+       102 Bharath                   40000
+       103 Vijay                     30000
+
+SQL> select * from tbl_employee where emp_id in(101,102,103) and emp_salary > 30000;
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       101 Kavin                     50000
+       102 Bharath                   40000
+
+SQL> select * from tbl_employee where emp_id in(101,102,103) or emp_salary >
+ 30000;
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       101 Kavin                     50000
+       102 Bharath                   40000
+       103 Vijay                     30000
+       104 Barath                    50000
+
+SQL> select * from tbl_employee where emp_id > 103 and emp_salary < 30000
+  2
+SQL> select * from tbl_employee where emp_id > 103 and emp_salary < 30000;
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       105 Yogi                      20000
+
+SQL> select * from tbl_employee where emp_id > 103 or emp_salary < 30000;
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       104 Barath                    50000
+       105 Yogi                      20000
+
+SQL> insert into tbl_employee (emp_id,emp_name) values (106,Prakash);
+insert into tbl_employee (emp_id,emp_name) values (106,Prakash)
+                                                       *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> insert into tbl_employee (emp_id,emp_name) values (106,prakash);
+insert into tbl_employee (emp_id,emp_name) values (106,prakash)
+                                                       *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> insert into tbl_employee (emp_id,emp_name) values (106,'Prakash');
+
+1 row created.
+
+SQL> select * from tbl_employee;
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       101 Kavin                     50000
+       102 Bharath                   40000
+       103 Vijay                     30000
+       104 Barath                    50000
+       105 Yogi                      20000
+       106 Prakash
+
+6 rows selected.
+
+SQL> select * from tbl_employee where emp_salary is null;
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       106 Prakash
+
+SQL> select * from tbl_employee where emp_salary is not null;
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       101 Kavin                     50000
+       102 Bharath                   40000
+       103 Vijay                     30000
+       104 Barath                    50000
+       105 Yogi                      20000
+
+SQL> select * from tbl_employee where emp_name is null;
+
+no rows selected
+
+SQL> select * from tbl_employee is null;
+select * from tbl_employee is null
+                           *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select * from tbl_employee where is null;
+select * from tbl_employee where is null
+                                 *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select * from tbl_employee where tbl_employee is null;
+select * from tbl_employee where tbl_employee is null
+                                 *
+ERROR at line 1:
+ORA-00904: "TBL_EMPLOYEE": invalid identifier
+
+
+SQL> select * from tbl_employee where * is null;
+select * from tbl_employee where * is null
+                                 *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> select * from tbl_employee where emp_name like 'V%';
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       103 Vijay                     30000
+
+SQL> select * from tbl_employee where emp_name like '%h';
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       102 Bharath                   40000
+       104 Barath                    50000
+       106 Prakash
+
+SQL> select * from tbl_employee where emp_name like '_h%';
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       102 Bharath                   40000
+
+SQL> select * from tbl_employee where emp_name like '__a%';
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       102 Bharath                   40000
+       106 Prakash
+
+SQL> select * from tbl_employee where emp_name like '%a%';
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       101 Kavin                     50000
+       102 Bharath                   40000
+       103 Vijay                     30000
+       104 Barath                    50000
+       106 Prakash
+
+SQL> select * from tbl_employee where emp_name not like '%a';
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       101 Kavin                     50000
+       102 Bharath                   40000
+       103 Vijay                     30000
+       104 Barath                    50000
+       105 Yogi                      20000
+       106 Prakash
+
+6 rows selected.
+
+SQL> select * from tbl_employee where emp_name not like '%h';
+
+    EMP_ID EMP_NAME             EMP_SALARY
+---------- -------------------- ----------
+       101 Kavin                     50000
+       103 Vijay                     30000
+       105 Yogi                      20000
+
+SQL> alter table tbl_employee add emp_Doj date;
+
+Table altered.
+
+SQL> desc tbl_employee
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                             NUMBER(5)
+ EMP_NAME                                           VARCHAR2(20)
+ EMP_SALARY                                         NUMBER(6)
+ EMP_DOJ                                            DATE
+
+SQL> alter table tbl_employee drop emp_Doj;
+alter table tbl_employee drop emp_Doj
+                              *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> alter table tbl_employee drop column emp_Doj;
+
+Table altered.
+
+SQL> desc tbl_employyee
+ERROR:
+ORA-04043: object tbl_employyee does not exist
+
+
+SQL> desc tbl_employee
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                             NUMBER(5)
+ EMP_NAME                                           VARCHAR2(20)
+ EMP_SALARY                                         NUMBER(6)
+
+SQL> rollback tbl_employee
+  2
+SQL> rollback tbl_employee;
+rollback tbl_employee
+         *
+ERROR at line 1:
+ORA-02181: invalid option to ROLLBACK WORK
+
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> desc tbl_employee
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                             NUMBER(5)
+ EMP_NAME                                           VARCHAR2(20)
+ EMP_SALARY                                         NUMBER(6)
+
+SQL> commit
+  2
+SQL> commit;
+
+Commit complete.
+
+SQL> alter table tbl_employee modify emp_salary number(7);
+
+Table altered.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> desc tbl_employee
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                             NUMBER(5)
+ EMP_NAME                                           VARCHAR2(20)
+ EMP_SALARY                                         NUMBER(7)
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> desc tbl_employee
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                             NUMBER(5)
+ EMP_NAME                                           VARCHAR2(20)
+ EMP_SALARY                                         NUMBER(7)
+
+SQL> emp_salary rollback;
+SP2-0734: unknown command beginning "emp_salary..." - rest of line ignored.
+SQL> alter table tbl_employee change emp_salary esalary;
+alter table tbl_employee change emp_salary esalary
+                         *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table tbl_employee rename column emp_salary esalary;
+alter table tbl_employee rename column emp_salary esalary
+                                                  *
+ERROR at line 1:
+ORA-00946: missing TO keyword
+
+
+SQL> alter table tbl_employee rename column emp_salary to esalary;
+
+Table altered.
+
+SQL> desc tbl_employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                             NUMBER(5)
+ EMP_NAME                                           VARCHAR2(20)
+ ESALARY                                            NUMBER(7)
+
+SQL> alter table tbl_employee rename column esalary to emp_salary;
+
+Table altered.
+
+SQL> desc tbl_employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                             NUMBER(5)
+ EMP_NAME                                           VARCHAR2(20)
+ EMP_SALARY                                         NUMBER(7)
+
+SQL> alter table tbl_employee rename to tbl_emp;
+
+Table altered.
+
+SQL> alter table tbl_emp rename to tbl_employee;
+
+Table altered.
