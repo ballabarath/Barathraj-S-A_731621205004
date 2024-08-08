@@ -1,0 +1,490 @@
+
+SQL> connect system;
+Enter password:
+Connected.
+SQL> select * tbl_employee;
+select * tbl_employee
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select * from  tbl_employee;
+
+       EID ENAME                  E_SALARY
+---------- -------------------- ----------
+        31 Teddy                     25000
+        32 Kavin                     15000
+        33 Kumar                     20000
+        34 Bharath                   22000
+        39 Niranjan                  22000
+        40 barath                    21000
+
+6 rows selected.
+
+SQL> alter table tbl_employee add dno number(3);
+
+Table altered.
+
+SQL> update tbl_employee set dno=10 where eid=31;
+
+1 row updated.
+
+SQL> update tbl_employee set dno=10 where eid=32;
+
+1 row updated.
+
+SQL> update tbl_employee set dno=20 where eid=33;
+
+1 row updated.
+
+SQL> update tbl_employee set dno=20 where eid=34;
+
+1 row updated.
+
+SQL> update tbl_employee set dno=30 where eid=39;
+
+1 row updated.
+
+SQL> update tbl_employee set dno=30 where eid=40;
+
+1 row updated.
+
+SQL> select * from  tbl_employee;
+
+       EID ENAME                  E_SALARY        DNO
+---------- -------------------- ---------- ----------
+        31 Teddy                     25000         10
+        32 Kavin                     15000         10
+        33 Kumar                     20000         20
+        34 Bharath                   22000         20
+        39 Niranjan                  22000         30
+        40 barath                    21000         30
+
+6 rows selected.
+
+SQL> select dno,count(*) from tbl_employee group by dno;
+
+       DNO   COUNT(*)
+---------- ----------
+        30          2
+        20          2
+        10          2
+
+SQL> select eid,count(*) form tbl_employee group by eid;
+select eid,count(*) form tbl_employee group by eid
+                         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select eid,count(*) from tbl_employee group by eid;
+
+       EID   COUNT(*)
+---------- ----------
+        34          1
+        31          1
+        32          1
+        33          1
+        40          1
+        39          1
+
+6 rows selected.
+
+SQL> select dno,count(*),sum(esalary),avg(esalary,min(esalary),max(salary) from tbl_employee group by dno;
+select dno,count(*),sum(esalary),avg(esalary,min(esalary),max(salary) from tbl_employee group by dno
+                                 *
+ERROR at line 1:
+ORA-00909: invalid number of arguments
+
+
+SQL> select dno,count(*),sum(e_salary),avg(e_salary,min(e_salary),max(e_salary) from tbl_employee group by dno;
+select dno,count(*),sum(e_salary),avg(e_salary,min(e_salary),max(e_salary) from tbl_employee group by dno
+                                  *
+ERROR at line 1:
+ORA-00909: invalid number of arguments
+
+
+SQL> select dno,count(*),sum(e_salary),avg(e_salary),min(e_salary),max(e_salary) from tbl_employee group by dno;
+
+       DNO   COUNT(*) SUM(E_SALARY) AVG(E_SALARY) MIN(E_SALARY) MAX(E_SALARY)
+---------- ---------- ------------- ------------- ------------- -------------
+        30          2         43000         21500         21000         22000
+        20          2         42000         21000         20000         22000
+        10          2         40000         20000         15000         25000
+
+SQL> select dno,count(*),sum(e_salary),avg(e_salary),min(e_salary),max(e_salary) from tbl_employee group by dno order by dno;
+
+       DNO   COUNT(*) SUM(E_SALARY) AVG(E_SALARY) MIN(E_SALARY) MAX(E_SALARY)
+---------- ---------- ------------- ------------- ------------- -------------
+        10          2         40000         20000         15000         25000
+        20          2         42000         21000         20000         22000
+        30          2         43000         21500         21000         22000
+
+SQL> select dno,count(*),sum(e_salary),avg(e_salary),min(e_salary),max(e_salary) from tbl_employee group by dno having min(e_salery)>15000 order by dno;
+select dno,count(*),sum(e_salary),avg(e_salary),min(e_salary),max(e_salary) from tbl_employee group by dno having min(e_salery)>15000 order by dno
+                                                                                                                      *
+ERROR at line 1:
+ORA-00904: "E_SALERY": invalid identifier
+
+
+SQL> select dno,count(*),sum(e_salary),avg(e_salary),min(e_salary),max(e_salary) from tbl_employee group by dno having min(e_salery)>15000 order by dno;
+select dno,count(*),sum(e_salary),avg(e_salary),min(e_salary),max(e_salary) from tbl_employee group by dno having min(e_salery)>15000 order by dno
+                                                                                                                      *
+ERROR at line 1:
+ORA-00904: "E_SALERY": invalid identifier
+
+
+SQL> select dno,count(*),sum(e_salary),avg(e_salary),min(e_salary),max(e_salary) from tbl_employee group by dno having min(e_salary)>15000 order by dno;
+
+       DNO   COUNT(*) SUM(E_SALARY) AVG(E_SALARY) MIN(E_SALARY) MAX(E_SALARY)
+---------- ---------- ------------- ------------- ------------- -------------
+        20          2         42000         21000         20000         22000
+        30          2         43000         21500         21000         22000
+
+SQL> select dno,count(*),sum(e_salary),avg(e_salary),min(e_salary),max(e_salary) from tbl_employee group by dno having min(e_salary)>=15000 order by dno;
+
+       DNO   COUNT(*) SUM(E_SALARY) AVG(E_SALARY) MIN(E_SALARY) MAX(E_SALARY)
+---------- ---------- ------------- ------------- ------------- -------------
+        10          2         40000         20000         15000         25000
+        20          2         42000         21000         20000         22000
+        30          2         43000         21500         21000         22000
+
+SQL> select dno,count(*),sum(e_salary),avg(e_salary),min(e_salary),max(e_salary) from tbl_employee group by dno having min(e_salary)!=15000 order by dno;
+
+       DNO   COUNT(*) SUM(E_SALARY) AVG(E_SALARY) MIN(E_SALARY) MAX(E_SALARY)
+---------- ---------- ------------- ------------- ------------- -------------
+        20          2         42000         21000         20000         22000
+        30          2         43000         21500         21000         22000
+
+SQL> select dno,count(*),sum(e_salary),avg(e_salary),min(e_salary),max(e_salary) from tbl_employee group by dno having max(e_salary) between 20000 and 22000 order by dno;
+
+       DNO   COUNT(*) SUM(E_SALARY) AVG(E_SALARY) MIN(E_SALARY) MAX(E_SALARY)
+---------- ---------- ------------- ------------- ------------- -------------
+        20          2         42000         21000         20000         22000
+        30          2         43000         21500         21000         22000
+
+SQL> select dno,count(*),e_salary,avg(e_salary),min(e_salary),max(e_salary) from tbl_employee group by dno having max(e_salary) between 20000 and 22000 order by dno;
+select dno,count(*),e_salary,avg(e_salary),min(e_salary),max(e_salary) from tbl_employee group by dno having max(e_salary) between 20000 and 22000 order by dno
+                    *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression
+
+
+SQL> select dno,count(*),sum(e_salary),avg(e_salary),min(e_salary),max(e_salary) from tbl_employee group by dno having max(e_salary) between 20000 and 22000 order by dno;
+
+       DNO   COUNT(*) SUM(E_SALARY) AVG(E_SALARY) MIN(E_SALARY) MAX(E_SALARY)
+---------- ---------- ------------- ------------- ------------- -------------
+        20          2         42000         21000         20000         22000
+        30          2         43000         21500         21000         22000
+
+SQL> create table tbl_student(reg_no number(5) primary key,stud_name varchar2(20) not null,stud_email varchar2(20) unique,stud_age number(3) check(stud_age>0),stud_location varchar2(20) default 'Erode');
+
+Table created.
+
+SQL> select * from  tbl_student;
+
+no rows selected
+
+SQL> insert into tbl_student values(33,Kavin,kavin@gmail.com,19,'salem');
+insert into tbl_student values(33,Kavin,kavin@gmail.com,19,'salem')
+*
+ERROR at line 1:
+ORA-04054: database link GMAIL.COM does not exist
+
+
+SQL> insert into tbl_student values(33,Kavin,kavingmail,19,'salem');
+insert into tbl_student values(33,Kavin,kavingmail,19,'salem')
+                                        *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> insert into tbl_student (reg_no,stud_name,stud_email,stud_age) values(33,Kavin,kavingmail,19);
+insert into tbl_student (reg_no,stud_name,stud_email,stud_age) values(33,Kavin,kavingmail,19)
+                                                                               *
+ERROR at line 1:
+ORA-00984: column not allowed here
+
+
+SQL> insert into tbl_student (reg_no,stud_name,stud_email,stud_age) values(33,'Kavin','kavingmail',19);
+
+1 row created.
+
+SQL> insert into tbl_student (reg_no,stud_name,stud_email,stud_age) values(33,'Kavin','kavingmail',-1);
+insert into tbl_student (reg_no,stud_name,stud_email,stud_age) values(33,'Kavin','kavingmail',-1)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.SYS_C006998) violated
+
+
+SQL> insert into tbl_student (reg_no,stud_name,stud_email,stud_age) values(33,'Kavin','kavingmail',20);
+insert into tbl_student (reg_no,stud_name,stud_email,stud_age) values(33,'Kavin','kavingmail',20)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C006999) violated
+
+
+SQL> insert into tbl_student (reg_no,stud_email,stud_age) values(32,'kavingmail',20);
+insert into tbl_student (reg_no,stud_email,stud_age) values(32,'kavingmail',20)
+*
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SYSTEM"."TBL_STUDENT"."STUD_NAME")
+
+
+SQL> insert into tbl_student (reg_no,stud_name,stud_email,stud_age) values(32,'kumar','kavingmail',20);
+insert into tbl_student (reg_no,stud_name,stud_email,stud_age) values(32,'kumar','kavingmail',20)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C007000) violated
+
+
+SQL> insert into tbl_student (reg_no,stud_name,stud_email,stud_age) values(32,'kumar','kavigmail',20);
+
+1 row created.
+
+SQL> insert into tbl_student (reg_no,stud_name,stud_email,stud_age) values(32,'kumar','kumargmail',20);
+insert into tbl_student (reg_no,stud_name,stud_email,stud_age) values(32,'kumar','kumargmail',20)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C006999) violated
+
+
+SQL> insert into tbl_student (reg_no,stud_name,stud_age) values(32,'kumar',20);
+insert into tbl_student (reg_no,stud_name,stud_age) values(32,'kumar',20)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C006999) violated
+
+
+SQL> select * from tbl_student;
+
+    REG_NO STUD_NAME            STUD_EMAIL             STUD_AGE
+---------- -------------------- -------------------- ----------
+STUD_LOCATION
+--------------------
+        33 Kavin                kavingmail                   19
+Erode
+
+        32 kumar                kavigmail                    20
+Erode
+
+
+SQL> set linesize 180;
+SQL> select * from tbl_student;
+
+    REG_NO STUD_NAME            STUD_EMAIL             STUD_AGE STUD_LOCATION
+---------- -------------------- -------------------- ---------- --------------------
+        33 Kavin                kavingmail                   19 Erode
+        32 kumar                kavigmail                    20 Erode
+
+SQL> create table department (dno number(5) primary key, dname varchar2(20))
+;
+
+Table created.
+
+SQL> create table employee (emp_id number(5) primary key, emp_name varchar2(
+20), emp_salary number(5), dno number(5), foreign key (dno) references department(dno));
+
+Table created.
+
+SQL> insert into employee values(101,'kavin',50000,10);
+insert into employee values(101,'kavin',50000,10)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C007003) violated - parent key not found
+
+
+SQL> insert into department values(10,'CSE');
+
+1 row created.
+
+SQL> insert into department values(20,'IT');
+
+1 row created.
+
+SQL> insert into department values(30,'ECE');
+
+1 row created.
+
+SQL> insert into employee values(101,'kavin',50000,10);
+
+1 row created.
+
+SQL> insert into employee values(101,'Vijay',50000,10);
+insert into employee values(101,'Vijay',50000,10)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C007002) violated
+
+
+SQL> insert into employee values(102,'Vijay',50000,10);
+
+1 row created.
+
+SQL> insert into employee values(103,'Bharath',50000,20);
+
+1 row created.
+
+SQL> insert into employee values(103,'Barath',50000,20);
+insert into employee values(103,'Barath',50000,20)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C007002) violated
+
+
+SQL> insert into employee values(104,'Barath',50000,20);
+
+1 row created.
+
+SQL> insert into employee values(105,'Dhanush',50000,30);
+
+1 row created.
+
+SQL> insert into employee values(106,'Kiruthik',45000,30);
+
+1 row created.
+
+SQL> select * from employee;
+
+    EMP_ID EMP_NAME             EMP_SALARY        DNO
+---------- -------------------- ---------- ----------
+       101 kavin                     50000         10
+       102 Vijay                     50000         10
+       103 Bharath                   50000         20
+       104 Barath                    50000         20
+       105 Dhanush                   50000         30
+       106 Kiruthik                  45000         30
+
+6 rows selected.
+
+SQL> select * from department;
+
+       DNO DNAME
+---------- --------------------
+        10 CSE
+        20 IT
+        30 ECE
+
+SQL> create viwe myview as select * from tbl_employee where dno=10;
+create viwe myview as select * from tbl_employee where dno=10
+       *
+ERROR at line 1:
+ORA-00901: invalid CREATE command
+
+
+SQL> create view myview as select * from tbl_employee where dno=10;
+
+View created.
+
+SQL> desc employee;
+ Name                                                                             Null?     Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ EMP_ID
+      NOT NULL NUMBER(5)
+ EMP_NAME                                                                  VARCHAR2(20)
+ EMP_SALARY                                                                NUMBER(5)
+ DNO                                                                       NUMBER(5)
+
+SQL> set linesize 180;
+SQL> desc employee;
+ Name                                                                             Null?     Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ EMP_ID
+      NOT NULL NUMBER(5)
+ EMP_NAME                                                                  VARCHAR2(20)
+ EMP_SALARY                                                                NUMBER(5)
+ DNO                                                                       NUMBER(5)
+
+SQL> select * from myview;
+
+    EMP_ID EMP_NAME             EMP_SALARY        DNO
+---------- -------------------- ---------- ----------
+       101 Kavin                     50000         10
+       102 Bharath                   40000         10
+
+SQL> create view myview as select * from employee where dno=10;
+create view myview as select * from employee where dno=10
+            *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create view myview1 as select * from employee where dno=10;
+
+View created.
+
+SQL> select * from myview1;
+
+    EMP_ID EMP_NAME             EMP_SALARY        DNO
+---------- -------------------- ---------- ----------
+       101 kavin                     50000         10
+       102 Vijay                     50000         10
+
+SQL> drop view myview;
+
+View dropped.
+
+SQL> select * from myview;
+select * from myview
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> select * from myview1;
+
+    EMP_ID EMP_NAME             EMP_SALARY        DNO
+---------- -------------------- ---------- ----------
+       101 kavin                     50000         10
+       102 Vijay                     50000         10
+
+SQL> update myview1 set emp_salary = 25000 where emp_id = 102;
+
+1 row updated.
+
+SQL> select * from myview1;
+
+    EMP_ID EMP_NAME             EMP_SALARY        DNO
+---------- -------------------- ---------- ----------
+       101 kavin                     50000         10
+       102 Vijay                     25000         10
+
+SQL> select * from employee;
+
+    EMP_ID EMP_NAME             EMP_SALARY        DNO
+---------- -------------------- ---------- ----------
+       101 kavin                     50000         10
+       102 Vijay                     25000         10
+       103 Bharath                   50000         20
+       104 Barath                    50000         20
+       105 Dhanush                   50000         30
+       106 Kiruthik                  45000         30
+
+6 rows selected.
+
+SQL> select emp_id as "Employee ID" from employee;
+
+Employee ID
+-----------
+        101
+        102
+        103
+        104
+        105
+        106
+
+6 rows selected.
+
+SQL> select emp_id "Employee ID" from employee;
+
+Employee ID
+-----------
+        101
+        102
+        103
+        104
+        105
+        106
+
+6 rows selected.
