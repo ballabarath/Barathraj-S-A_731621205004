@@ -1,0 +1,168 @@
+SQL> desc tbl_sales_table;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SALE_ID                                            NUMBER(5)
+ PRODUCT_ID                                         NUMBER(5)
+ QUANTITY_SOLD                                      NUMBER(5)
+ SALE_DATE                                          DATE
+ TOTAL_PRICE                                        NUMBER(7,2)
+
+SQL> select * from tbl_sales_table;
+
+   SALE_ID PRODUCT_ID QUANTITY_SOLD SALE_DATE TOTAL_PRICE
+---------- ---------- ------------- --------- -----------
+         1        101             5 01-JAN-24        2500
+         2        102             3 02-JAN-24         900
+         3        103             2 02-JAN-24          60
+         4        104             4 03-JAN-24          80
+         5        105             6 03-JAN-24          90
+
+SQL> select sale_id,quantity_sold from tbl_sales_table;
+
+   SALE_ID QUANTITY_SOLD
+---------- -------------
+         1             5
+         2             3
+         3             2
+         4             4
+         5             6
+
+SQL> select sale_id,sale_date from tbl_sales_table;
+
+   SALE_ID SALE_DATE
+---------- ---------
+         1 01-JAN-24
+         2 02-JAN-24
+         3 02-JAN-24
+         4 03-JAN-24
+         5 03-JAN-24
+
+SQL> select * from tbl_sales_table where total_price>100;
+
+   SALE_ID PRODUCT_ID QUANTITY_SOLD SALE_DATE TOTAL_PRICE
+---------- ---------- ------------- --------- -----------
+         1        101             5 01-JAN-24        2500
+         2        102             3 02-JAN-24         900
+
+SQL> select sale_id,total_price from tbl_sales_table where sale_date = '03-Jan-24';
+
+   SALE_ID TOTAL_PRICE
+---------- -----------
+         4          80
+         5          90
+
+SQL> select sale_id,product_id,total_price from tbl_sales_table where quantity_sold > 4;
+
+   SALE_ID PRODUCT_ID TOTAL_PRICE
+---------- ---------- -----------
+         1        101        2500
+         5        105          90
+
+SQL> select * from tbl_sales_table where sale_id in (1,3,5);
+
+   SALE_ID PRODUCT_ID QUANTITY_SOLD SALE_DATE TOTAL_PRICE
+---------- ---------- ------------- --------- -----------
+         1        101             5 01-JAN-24        2500
+         3        103             2 02-JAN-24          60
+         5        105             6 03-JAN-24          90
+
+SQL> select * from tbl_sales_table where total_price between 90 and 1000;
+
+   SALE_ID PRODUCT_ID QUANTITY_SOLD SALE_DATE TOTAL_PRICE
+---------- ---------- ------------- --------- -----------
+         2        102             3 02-JAN-24         900
+         5        105             6 03-JAN-24          90
+
+SQL> select * from tbl_sales_table where total_price not between 90 and 1000;
+
+   SALE_ID PRODUCT_ID QUANTITY_SOLD SALE_DATE TOTAL_PRICE
+---------- ---------- ------------- --------- -----------
+         1        101             5 01-JAN-24        2500
+         3        103             2 02-JAN-24          60
+         4        104             4 03-JAN-24          80
+
+SQL> select * from tbl_sales_table where sale_id not in (1,3,5);
+
+   SALE_ID PRODUCT_ID QUANTITY_SOLD SALE_DATE TOTAL_PRICE
+---------- ---------- ------------- --------- -----------
+         2        102             3 02-JAN-24         900
+         4        104             4 03-JAN-24          80
+
+SQL> update tbl_sales_table set total_price = 500 where sale_id in (1,3,5);
+
+3 rows updated.
+
+SQL> select * from tbl_sales_table;
+
+   SALE_ID PRODUCT_ID QUANTITY_SOLD SALE_DATE TOTAL_PRICE
+---------- ---------- ------------- --------- -----------
+         1        101             5 01-JAN-24         500
+         2        102             3 02-JAN-24         900
+         3        103             2 02-JAN-24         500
+         4        104             4 03-JAN-24          80
+         5        105             6 03-JAN-24         500
+
+SQL> delete from tbl_sales_table where total_price not between 90 and 1000;
+
+1 row deleted.
+
+SQL> select * from tbl_sales_table;
+
+   SALE_ID PRODUCT_ID QUANTITY_SOLD SALE_DATE TOTAL_PRICE
+---------- ---------- ------------- --------- -----------
+         1        101             5 01-JAN-24         500
+         2        102             3 02-JAN-24         900
+         3        103             2 02-JAN-24         500
+         5        105             6 03-JAN-24         500
+
+SQL> select * from tbl_sales_table order by sale_id;
+
+   SALE_ID PRODUCT_ID QUANTITY_SOLD SALE_DATE TOTAL_PRICE
+---------- ---------- ------------- --------- -----------
+         1        101             5 01-JAN-24         500
+         2        102             3 02-JAN-24         900
+         3        103             2 02-JAN-24         500
+         5        105             6 03-JAN-24         500
+
+SQL> select * from tbl_sales_table order by sale_id desc;
+
+   SALE_ID PRODUCT_ID QUANTITY_SOLD SALE_DATE TOTAL_PRICE
+---------- ---------- ------------- --------- -----------
+         5        105             6 03-JAN-24         500
+         3        103             2 02-JAN-24         500
+         2        102             3 02-JAN-24         900
+         1        101             5 01-JAN-24         500
+
+SQL> alter table tbl_sales_table rename column sale_id to sales_id;
+
+Table altered.
+
+SQL> select * from tbl_sales_table;
+
+  SALES_ID PRODUCT_ID QUANTITY_SOLD SALE_DATE TOTAL_PRICE
+---------- ---------- ------------- --------- -----------
+         1        101             5 01-JAN-24         500
+         2        102             3 02-JAN-24         900
+         3        103             2 02-JAN-24         500
+         5        105             6 03-JAN-24         500
+
+SQL> alter table tbl_sales_table drop column sales_id;
+
+Table altered.
+
+SQL> select * from tbl_sales_table;
+
+PRODUCT_ID QUANTITY_SOLD SALE_DATE TOTAL_PRICE
+---------- ------------- --------- -----------
+       101             5 01-JAN-24         500
+       102             3 02-JAN-24         900
+       103             2 02-JAN-24         500
+       105             6 03-JAN-24         500
+
+SQL> rename tbl_sales_table to tbl_sales;
+
+Table renamed.
+
+SQL> drop table tbl_sales;
+
+Table dropped.
